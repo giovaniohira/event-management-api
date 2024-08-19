@@ -28,3 +28,33 @@ exports.login = async (req, res) => {
     res.status(400).json({ error: 'Erro ao realizar login.' });
   }
 };
+
+exports.updateUser = async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const { name, email, password } = req.body;
+  
+      // Verifica se o usuário existe
+      const user = await User.findByPk(userId);
+      if (!user) {
+        return res.status(404).json({ message: 'Usuário não encontrado.' });
+      }
+  
+      // Verifica se o usuário que está tentando atualizar é o mesmo ou se é um administrador
+      if (userId != req.user.id && req.user.role !== 'admin') {
+        return res.status(403).json({ message: 'Permissão negada.' });
+      }
+  
+      // Atualiza os dados do usuário
+      if (name) user.name = name;
+      if (email) user.email = email;
+      if (password) {
+        user.password = await bcrypt.hash(password, 10);
+      }
+  
+      await user.save();
+      res.status(200).json({ message: 'Dados atualizados com sucesso.', user });
+    } catch (error) {
+      res.status(500).json({ message: 'Erro ao atualizar dados', error });
+    }
+};
