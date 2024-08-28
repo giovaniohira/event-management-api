@@ -6,8 +6,8 @@ module.exports = {
     await queryInterface.bulkInsert('Users', [{
       name: 'Admin',
       email: 'admin@example.com',
-      password: 'adminpassword', // Utilize uma senha segura e criptografada
-      role: 'admin',
+      password: 'adminpassword',
+      isAdmin: true,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
