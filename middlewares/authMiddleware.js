@@ -9,7 +9,12 @@ exports.verifyToken = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await User.findByPk(decoded.id);
+    const user = await User.findByPk(decoded.id);
+    if (!user) {
+      return res.status(401).json({ message: 'Usuário não encontrado.' });
+    }
+    req.userId = user.id;
+    req.user = user;
     next();
   } catch (error) {
     res.status(403).json({ message: 'Token inválido.' });
