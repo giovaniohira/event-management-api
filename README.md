@@ -1,5 +1,3 @@
-Here’s a detailed `README.md` file for your project:
-
 ---
 
 # Event Management API
@@ -109,25 +107,30 @@ This route provides detailed documentation of all available endpoints.
 src/
 │
 ├── config/
-│   ├── config.js
 │   └── database.js
 │
 ├── controllers/
-│   ├── authController.js
+│   ├── adminController.js
+|   ├── eventController.js
+|   ├── reportController.js
+|   ├── subscriptionController.js
 │   └── userController.js
 │
 ├── middlewares/
 │   └── authMiddleware.js
 │
 ├── models/
-│   ├── User.js
-│   ├── Event.js
-│   └── Subscription.js
+│   ├── user.js
+│   ├── event.js
+│   ├── index.js.js
+│   └── subscription.js
 │
 ├── routes/
-│   ├── authRoutes.js
-│   ├── index.js
+│   ├── adminRoutes.js
+│   ├── eventRoutes.js
+│   ├── reportRoutes.js
 │   ├── installRoutes.js
+│   ├── subscriptionRoutes.js
 │   └── userRoutes.js
 │
 ├── seeders/
@@ -136,34 +139,10 @@ src/
 │   ├── 20240818120002-create-default-admin.js
 │   └── 20240819-create-subscriptions.js
 │
-├── utils/
-│   ├── errorHandler.js
-│   └── validation.js
+├── migrations/
 │
 └── app.js
 ```
-
-## Endpoints
-
-### User Authentication & Management
-
-- `POST /auth/register/` - Register a new user
-- `POST /auth/login/` - User login, returns JWT
-- `PUT /users/:id/` - Update user information (self or admin)
-- `DELETE /users/:id/` - Delete a user (admin only)
-
-### Events Management
-
-- `POST /events/` - Create a new event
-- `GET /events/` - List events with pagination
-- `PUT /events/:id/` - Update event details
-- `DELETE /events/:id/` - Delete an event
-
-### Subscriptions Management
-
-- `POST /subscriptions/` - Subscribe to an event
-- `GET /subscriptions/` - List subscriptions with pagination
-- `DELETE /subscriptions/:id/` - Unsubscribe from an event
 
 ### Utility Endpoints
 
