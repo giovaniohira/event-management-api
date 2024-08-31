@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -13,14 +14,30 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
+
   User.init({
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    isAdmin: DataTypes.BOOLEAN
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false // NOT NULL
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false, // NOT NULL
+      unique: true // UNIQUE
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false // NOT NULL
+    },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false, // NOT NULL
+      defaultValue: false // valor padrão
+    }
   }, {
     sequelize,
     modelName: 'User',
   });
+
   return User;
 };
