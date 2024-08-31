@@ -47,7 +47,7 @@ A RESTful API built with Express and PostgreSQL, designed to manage users, event
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/event-management-api.git
+   git clone https://github.com/giovaniohira/event-management-api.git
    cd event-management-api
    ```
 
