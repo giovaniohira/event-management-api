@@ -10,7 +10,7 @@ exports.register = async (req, res) => {
     const user = await User.create({ name, email, password: hash, isAdmin: false });
     res.status(201).json({ message: 'Usuário criado com sucesso!', user });
   } catch (error) {
-    res.status(400).json({ error: 'Erro ao criar usuário.' });
+    res.status(400).json({ error: error.parent.detail });
   }
 };
 
@@ -25,7 +25,7 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ id: user.id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.json({ message: 'Login realizado com sucesso!', token });
   } catch (error) {
-    res.status(400).json({ error: 'Erro ao realizar login.' });
+    res.status(400).json({ error: error.parent.detail });
   }
 };
 
