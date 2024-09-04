@@ -10,11 +10,18 @@ exports.subscribeToEvent = async (req, res) => {
     if (!event) {
       return res.status(404).json({ error: 'Evento não encontrado.' });
     }
+    
+    const subscriptionCount = await Subscription.count({ where: { eventId: id } });
+    if (subscriptionCount >= event.limit) {
+      return res.status(400).json({ error: 'O evento já atingiu o limite máximo de inscrições.' });
+    }
 
     const [subscription, created] = await Subscription.findOrCreate({
       where: { userId, eventId: id },
       defaults: { userId, eventId: id }
     });
+
+
 
     if (!created) {
       return res.status(400).json({ error: 'Você já está inscrito neste evento.' });

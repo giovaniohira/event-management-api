@@ -25,6 +25,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      limit: {
+        type: Sequelize.INTEGER,
+        defaultValue: 3
       }
     });
   },
